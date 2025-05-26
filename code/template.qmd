@@ -1,0 +1,16 @@
+---
+title: "template"
+author: "Chris Gomez"
+format: html
+---
+
+```{r}
+
+library(tidyverse)
+library(here)
+library(gt)
+library(flextable)
+library(janitor)
+library(readxl)
+```
+
