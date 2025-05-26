@@ -5,6 +5,7 @@ format: html
 ---
 
 ```{r}
+#| message: false
 
 library(tidyverse)
 library(here)
@@ -14,3 +15,9 @@ library(janitor)
 library(readxl)
 ```
 
+
+# Problem 1. Personal data
+
+## a. 
+
+I could compare my mean step count at work between a morning shift and a non-morning shift because work is busier during a non-morning shift, so I think I take more steps during a non-morning shift. 
