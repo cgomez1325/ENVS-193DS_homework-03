@@ -2,6 +2,7 @@
 title: "template"
 author: "Chris Gomez"
 format: html
+https://github.com/cgomez1325/ENVS-193DS_homework-03 
 ---
 
 ```{r}
@@ -10,7 +11,6 @@ format: html
 library(tidyverse)
 library(here)
 library(gt)
-library(flextable)
 library(janitor)
 library(readxl)
 
@@ -33,26 +33,27 @@ steps_clean <- steps |> # making clean new object from steps
     opening_shift == "Yes" ~ "Morning", # renaming "Yes" to "morning"
     opening_shift == "No" ~ "Non-morning")) |> # renaming "No" to "non-morning"
   select(opening_shift, number_of_steps) # selecting certain columns 
+names(steps_clean)[names(steps_clean) == "opening_shift"] <- "Shift"
 
 t.test( # t-test
-  number_of_steps ~ opening_shift, # formula: response variable ~ grouping variable
+  number_of_steps ~ Shift, # formula: response variable ~ grouping variable
   var.equal = TRUE, # argument for equal/unequal variances
   data = steps_clean) # using steps_clean data frame
 
 steps_ci <- steps_clean |> # making new steps_ci object from steps_clean
-  group_by(opening_shift) |> # grouping by "opening shift"
+  group_by(Shift) |> # grouping by "opening shift"
   summarize(ci = mean_cl_normal(number_of_steps)) # calculating the 95% CI
 
 ggplot(data = steps_clean, # using steps_clean data frame 
-       aes(x = opening_shift, # x-axis
+       aes(x = Shift, # x-axis
            y = number_of_steps, # y-axis
-           color = opening_shift)) + # coloring points by opening_shift
+           color = Shift)) + # coloring points by opening_shift
   geom_jitter(height = 0, # no jitter in the vertical direction 
               width = 0.1, # smaller jitter in the horizontal direction 
               alpha = 0.4, # making the points more transparent 
               shape = 17) + # making the points triangles 
   geom_pointrange(data = steps_ci, # using the steps_ci data frame
-                  aes(x = opening_shift, # x-axis
+                  aes(x = Shift, # x-axis
                       y = ci$y, # y-axis
                       ymax = ci$ymax, # upper bound of confidence interval
                       ymin = ci$ymin)) + # lower bound of confidence interval 
@@ -69,5 +70,19 @@ ggplot(data = steps_clean, # using steps_clean data frame
 Comparing step counts between morning shifts and non-morning shifts. The mean step counts of morning shifts (12,785) is higher than the mean step count of non-morning shifts (12,054).  
 
 ## d. Table presentation
+
+```{r}
+steps_summary <- steps_clean |> 
+  group_by(Shift) |> 
+  summarize(mean = mean(number_of_steps),
+            ci = mean_cl_normal(number_of_steps)) |> 
+  mutate(mean = round(mean, 1),
+         ci = round(ci, 1)) |> 
+  gt()
+gt_tbl <- steps_summary |> 
+    tab_header(title = "Steps Summary")
+
+gt_tbl
+```
 
 
