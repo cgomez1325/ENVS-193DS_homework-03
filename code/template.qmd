@@ -14,7 +14,9 @@ library(gt)
 library(janitor)
 library(readxl)
 
-steps <- read_excel("data/steps.xlsx")
+steps <- read_xlsx( 
+  here("data", "steps.xlsx"),
+  sheet = "Sheet1")
 ```
 
 
@@ -73,16 +75,16 @@ Comparing step counts between morning shifts and non-morning shifts. The mean st
 
 ```{r}
 #| warning: false
-steps_summary <- steps_clean |> 
-  group_by(Shift) |> 
-  summarize(mean = mean(number_of_steps),
-            ci = mean_cl_normal(number_of_steps)) |> 
-  mutate(mean = round(mean, 1),
-         ci = round(ci, 1)) |> 
-  gt()
-gt_tbl <- steps_summary |> 
-    tab_header(title = "Steps Summary")
-
+steps_summary <- steps_clean |> # make new object from "steps_clean"
+  group_by(Shift) |> # group by shift
+  summarize(mean = mean(number_of_steps), # calculate the mean
+            ci = mean_cl_normal(number_of_steps)) |> # calculate the 95% CI
+  mutate(mean = round(mean, 1), # round mean to one decimal
+         ci = round(ci, 1)) |> # round the CI to one decimal
+  gt() # make a gt table
+gt_tbl <- steps_summary |> # use the "step_summary" data frame
+    tab_header(title = "Steps Summary") # make a table header
+  
 gt_tbl
 ```
 
