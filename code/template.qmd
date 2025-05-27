@@ -2,7 +2,7 @@
 title: "template"
 author: "Chris Gomez"
 format: html
-https://github.com/cgomez1325/ENVS-193DS_homework-03 
+link: https://github.com/cgomez1325/ENVS-193DS_homework-03 
 ---
 
 ```{r}
@@ -14,7 +14,7 @@ library(gt)
 library(janitor)
 library(readxl)
 
-steps <- read_excel("data/Steps_data.xlsx")
+steps <- read_excel("data/steps.xlsx")
 ```
 
 
@@ -72,6 +72,7 @@ Comparing step counts between morning shifts and non-morning shifts. The mean st
 ## d. Table presentation
 
 ```{r}
+#| warning: false
 steps_summary <- steps_clean |> 
   group_by(Shift) |> 
   summarize(mean = mean(number_of_steps),
@@ -84,5 +85,26 @@ gt_tbl <- steps_summary |>
 
 gt_tbl
 ```
+
+# Problem 2: Affective visualization 
+
+## a. 
+
+An affective visualization for my personal data would include dotted lines to represent my steps and I would color coded these dotted lines to show the difference in the time of day. So for my morning shift data I would use yellow and orange to visualize the sunrise. Then for my non-morning data I would use blue and purple to visualize the afternoon and night. I would also show the difference in how many steps I take by having more dotted lines for a morning shift than a non morning shift. 
+
+## b. 
+
+
+
+## c. 
+
+
+## d. 
+
+
+# Problem 3. Statistical critique 
+
+## a. 
+
 
 
