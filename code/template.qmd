@@ -105,9 +105,23 @@ An affective visualization for my personal data would divide the paper in two wi
 
 ![sketch](/Users/christophergomez/Downloads/ENVS-193DS/github/ENVS-193DS_homework-03/images/IMG_8596.png)
 
+
+
 ## c. 
 
 ```{r}
+
+knitr::include_graphics("/Users/christophergomez/Downloads/ENVS-193DS/github/ENVS-193DS_homework-03/images/IMG_8596.png")
+
+
+
+
+
+
+
+
+
+
 
 
 
