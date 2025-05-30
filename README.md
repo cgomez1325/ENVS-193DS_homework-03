@@ -27,12 +27,13 @@ File structure:
 ├── ENVS-193DS_homework-03.Rproj
 ├── README.md
 ├── code                                    # code folder
-│   ├── IMG_8596.png                        # sketch picture
+│   ├── FullSizeRender.png                  # sketch picture
+│   ├── IMG_8602.png                        # rough draft picture
 │   ├── template.html                       # templates
 │   ├── template.qmd
 │   └── template_file
 ├── data                                    # data folder
-│   ├── steps.xlsx
+│   ├── work-steps.xlsx
 ```
 All code is in the code folder. The code runs models, generates model predictions, and visualizes data.
 
